@@ -1,7 +1,7 @@
-# Fitness Activity and Progress Tracking App
+# Pure Pulse Fitness Activity and Progress Tracking App
 
 ## Description
-Fitness Activity and Progress Tracking App is a mobile application designed to manage fitness activities and track personal workout progress within a single platform. The previous project was further enhanced by integrating Riverpod 3 for state management and SQLite for local caching using a cache-first repository architecture. Additionally, the frontend was connected to the backend REST API to enable real-time authentication, authorization and CRUD operations..
+Pure Pulse is a mobile application designed to manage fitness activities and track personal workout progress within a single platform. The previous project was further enhanced by integrating Riverpod 3 for state management and SQLite for local caching using a cache-first repository architecture. Additionally, the frontend was connected to the backend REST API to enable real-time authentication, authorization and CRUD operations.To ensure reliability and maintainability, the project also includes comprehensive test coverage through unit tests, widget tests, integration tests, and Riverpod state management tests.
 
 ## Group Members
 
