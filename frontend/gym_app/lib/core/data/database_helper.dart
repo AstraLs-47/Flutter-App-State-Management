@@ -88,47 +88,47 @@ class DatabaseHelper {
         // Using sqflite.openDatabase() here respects that factory and avoids
         // the race condition that occurred when calling databaseFactoryFfiWeb
         // directly before the service worker was fully registered.
-        debugPrint('DatabaseHelper: Opening web database via global factory');
+        //debugPrint('DatabaseHelper: Opening web database via global factory');
         _sqliteDb = await sqflite.openDatabase(
           'purepulse.db',
           version: 3,
           onCreate: _onCreate,
           onUpgrade: _onUpgrade,
         );
-        debugPrint('DatabaseHelper: Web database opened successfully');
+        //debugPrint('DatabaseHelper: Web database opened successfully');
       } else {
-        debugPrint('DatabaseHelper: Opening mobile/desktop database');
+        //debugPrint('DatabaseHelper: Opening mobile/desktop database');
         final documentsDirectory = await getApplicationDocumentsDirectory();
         final path = p.join(documentsDirectory.path, 'purepulse.db');
-        debugPrint('DatabaseHelper: Database path: $path');
+        //debugPrint('DatabaseHelper: Database path: $path');
         _sqliteDb = await sqflite.openDatabase(
           path,
           version: 3,
           onCreate: _onCreate,
           onUpgrade: _onUpgrade,
         );
-        debugPrint(
+        /*         debugPrint(
           'DatabaseHelper: Mobile/desktop database opened successfully',
-        );
+        ); */
       }
       debugPrint('DatabaseHelper: Initialization complete');
     } catch (e) {
       if (kIsWeb && e.toString().contains('null')) {
-        debugPrint('--- [CRITICAL WEB ERROR] ---');
-        debugPrint(
+        //debugPrint('--- [CRITICAL WEB ERROR] ---');
+        /*         debugPrint(
           'Service Worker failed. Ensure sqflite_sw.js and sqlite3.wasm exist in web/ folder.',
-        );
-        debugPrint('Run: dart run sqflite_ffi_web:setup');
+        ); */
+        // debugPrint('Run: dart run sqflite_ffi_web:setup');
       }
       _initFailed = true;
-      debugPrint('DatabaseHelper init failed: $e');
-      debugPrint('Continuing in API-only mode (no local cache).');
+      //debugPrint('DatabaseHelper init failed: $e');
+      //debugPrint('Continuing in API-only mode (no local cache).');
     }
   }
 
   Future<void> _onCreate(sqflite.Database db, int version) async {
     try {
-      debugPrint('DatabaseHelper: Creating products table');
+      //debugPrint('DatabaseHelper: Creating products table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS products (
           id TEXT PRIMARY KEY,
@@ -141,11 +141,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create products table: $e');
+      //debugPrint('DatabaseHelper: Failed to create products table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating exercises table');
+      //debugPrint('DatabaseHelper: Creating exercises table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS exercises (
           id TEXT PRIMARY KEY,
@@ -161,11 +161,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create exercises table: $e');
+      //debugPrint('DatabaseHelper: Failed to create exercises table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating announcements table');
+      //debugPrint('DatabaseHelper: Creating announcements table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS announcements (
           id TEXT PRIMARY KEY,
@@ -176,11 +176,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create announcements table: $e');
+      //debugPrint('DatabaseHelper: Failed to create announcements table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating progress_entries table');
+      //debugPrint('DatabaseHelper: Creating progress_entries table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS progress_entries (
           id TEXT PRIMARY KEY,
@@ -199,11 +199,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create progress_entries table: $e');
+      //debugPrint('DatabaseHelper: Failed to create progress_entries table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating health_metrics table');
+      //debugPrint('DatabaseHelper: Creating health_metrics table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS health_metrics (
           id TEXT PRIMARY KEY,
@@ -219,11 +219,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create health_metrics table: $e');
+      //debugPrint('DatabaseHelper: Failed to create health_metrics table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating categories table');
+      //debugPrint('DatabaseHelper: Creating categories table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS categories (
           id TEXT PRIMARY KEY,
@@ -232,11 +232,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create categories table: $e');
+      //debugPrint('DatabaseHelper: Failed to create categories table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating user_sessions table');
+      //debugPrint('DatabaseHelper: Creating user_sessions table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS user_sessions (
           id INTEGER PRIMARY KEY,
@@ -246,11 +246,11 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create user_sessions table: $e');
+      //debugPrint('DatabaseHelper: Failed to create user_sessions table: $e');
     }
 
     try {
-      debugPrint('DatabaseHelper: Creating users table');
+      //debugPrint('DatabaseHelper: Creating users table');
       await db.execute('''
         CREATE TABLE IF NOT EXISTS users (
           id TEXT PRIMARY KEY,
@@ -259,10 +259,10 @@ class DatabaseHelper {
         )
       ''');
     } catch (e) {
-      debugPrint('DatabaseHelper: Failed to create users table: $e');
+      //debugPrint('DatabaseHelper: Failed to create users table: $e');
     }
 
-    debugPrint('DatabaseHelper: All tables created/verified successfully');
+    //debugPrint('DatabaseHelper: All tables created/verified successfully');
   }
 
   Future<void> _onUpgrade(

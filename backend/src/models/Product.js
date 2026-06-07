@@ -33,7 +33,7 @@ class Product {
     const { name, description, category, imageUrl, image, isActive } = data;
     const result = await pool.query(
       `UPDATE products SET name = $1, description = $2, category = $3,
-       image_url = $4, is_active = $5, updated_at = CURRENT_TIMESTAMP
+       image_url = $4, is_active = COALESCE($5, is_active), updated_at = CURRENT_TIMESTAMP
        WHERE id = $6 RETURNING *`,
       [name, description, category, imageUrl || image, isActive, id]
     );
